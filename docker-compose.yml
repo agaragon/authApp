@@ -1,0 +1,21 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - '5000:5000'
+    depends_on:
+      - db
+    env_file:
+      - .env
+    volumes:
+      - ./app:/app
+
+  db:
+    image: mysql:latest
+    ports:
+      - '3306:3306'
+    env_file:
+      - .env
+    volumes:
+      - ./mysql_seed:/docker-entrypoint-initdb.d
